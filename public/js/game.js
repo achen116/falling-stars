@@ -14,6 +14,7 @@ var stars;
 var fireballs;
 var score = 0;
 var scoreText;
+var gameOverText;
 
 var Game = {
 	preload: function() {
@@ -23,6 +24,8 @@ var Game = {
 		game.load.image('fireball', './imgs/fireball.png');
 		game.load.spritesheet('kirby', './imgs/kirby.png', 28.75, 26);
 		game.load.spritesheet('hurt-kirby', './imgs/hurt-kirby.png', 29.85, 26);
+
+		game.load.image('play-again', './imgs/play-again.png');
 	},
 
 	create: function() {
@@ -73,7 +76,7 @@ var Game = {
 
 		// the score =====================================
 		scoreText = game.add.text(20, 20, 'Score: 0', { fontSize: '20px', fill: '#fff' })
-
+		// gameOverText = game.add.text(350, game.world.height - 500, '', { fontSize: '50px', fill: '#fff' })
 	},
 
 	update: function() {
@@ -130,5 +133,11 @@ var fireballCollision = function(player, fireball) {
 	hurtKirby.animations.add('hurt', [0, 1, 2, 3, 4, 5, 6], 5, false);
 	hurtKirby.animations.play('hurt');
 
-	// this.state.start('GameOver');
+	gameOverText = game.add.text(350, game.world.height - 500, 'GAME OVER', { fontSize: '50px', fill: '#fff' })
+	// gameOverText.text = 'GAME OVER!';
+	game.add.button(435, game.world.height - 450, 'play-again', this.restartGame, this);
+}
+
+var restartGame = function() {
+	this.state.start('Game');
 }
