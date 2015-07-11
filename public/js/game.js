@@ -14,7 +14,6 @@ var stars;
 var fireballs;
 var score = 0;
 var scoreText;
-var gameOverText;
 
 var Game = {
 	preload: function() {
@@ -76,7 +75,6 @@ var Game = {
 
 		// the score =====================================
 		scoreText = game.add.text(20, 20, 'Score: 0', { fontSize: '20px', fill: '#fff' })
-		// gameOverText = game.add.text(350, game.world.height - 500, '', { fontSize: '50px', fill: '#fff' })
 	},
 
 	update: function() {
@@ -133,8 +131,7 @@ var fireballCollision = function(player, fireball) {
 	hurtKirby.animations.add('hurt', [0, 1, 2, 3, 4, 5, 6], 5, false);
 	hurtKirby.animations.play('hurt');
 
-	gameOverText = game.add.text(350, game.world.height - 500, 'GAME OVER', { fontSize: '50px', fill: '#fff' })
-	// gameOverText.text = 'GAME OVER!';
+	game.add.text(350, game.world.height - 500, 'GAME OVER', { fontSize: '50px', fill: '#fff' })
 	game.add.button(435, game.world.height - 450, 'play-again', this.restartGame, this);
 }
 
