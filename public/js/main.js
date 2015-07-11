@@ -5,5 +5,6 @@ var game = new Phaser.Game(1000, 800, Phaser.AUTO, '');
 
 game.state.add('Menu', Menu);
 game.state.add('Game', Game);
+game.state.add('GameOver', GameOver);
 
 game.state.start('Menu');
