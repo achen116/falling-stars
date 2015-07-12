@@ -11,6 +11,7 @@ var kirby;
 
 var cursors;
 
+var emitter;
 var stars;
 var fireballs;
 var score = 0;
@@ -71,25 +72,33 @@ var Game = {
 		// the key controls ==============================
 		cursors = game.input.keyboard.createCursorKeys();
 
-		// the star ======================================
-		stars = game.add.group();
-		stars.enableBody = true;
+		// the stars =====================================
+		// stars = game.add.group();
+		// stars.enableBody = true;
 
-		for (var i = 0; i < 20; i++) {
-			var star = stars.create(i * 50, 0, 'star');
-			// star.body.bounce.y = 0.5 + Math.random() * 0.2;
-			star.body.gravity.y = 10 + Math.random() * 10;
-		}
+		// for (var i = 0; i < 20; i++) {
+		// 	var star = stars.create(i * 50, 0, 'star');
+		// 	// star.body.bounce.y = 0.5 + Math.random() * 0.2;
+		// 	star.body.gravity.y = 10 + Math.random() * 10;
+		// }
+
+		emitter = game.add.emitter(450, 0, 250);
+		emitter.makeParticles('star', [0], 25, true, false)
+
+		emitter.gravity = 50;
+		emitter.bounce.setTo(0.5, 0.5);
+
+		emitter.start(false, 0, 1000)
 
 		// the fireball ==================================
-		fireballs = game.add.group();
-		fireballs.enableBody = true;
+		// fireballs = game.add.group();
+		// fireballs.enableBody = true;
 
-		for (var i = 0; i < 5; i++) {
-			var fireball = fireballs.create(i * 200, 0, 'fireball');
-			fireball.body.bounce.y = 0.1 + Math.random() * 0.2;
-			fireball.body.gravity.y = 5 + Math.random() * 10;
-		}
+		// for (var i = 0; i < 5; i++) {
+		// 	var fireball = fireballs.create(i * 200, 0, 'fireball');
+		// 	fireball.body.bounce.y = 0.1 + Math.random() * 0.2;
+		// 	fireball.body.gravity.y = 5 + Math.random() * 10;
+		// }
 
 		// the score =====================================
 		scoreText = game.add.text(20, 20, 'Score: 0', { fontSize: '20px', fill: '#fff' })
@@ -103,9 +112,9 @@ var Game = {
 	update: function() {
 		game.physics.arcade.collide(kirby, ground);
 		game.physics.arcade.collide(kirby, platforms);
-		// game.physics.arcade.collide(stars, platforms);
+		game.physics.arcade.collide(emitter, platforms);
 
-		game.physics.arcade.overlap(kirby, stars, collectStar, null, this);
+		game.physics.arcade.overlap(kirby, emitter, collectStar, null, this);
 		game.physics.arcade.overlap(kirby, fireballs, fireballCollision, null, this);
 
 
