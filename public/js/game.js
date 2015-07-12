@@ -72,15 +72,6 @@ var Game = {
 		cursors = game.input.keyboard.createCursorKeys();
 
 		// the stars =====================================
-		// stars = game.add.group();
-		// stars.enableBody = true;
-
-		// for (var i = 0; i < 20; i++) {
-		// 	var star = stars.create(i * 50, 0, 'star');
-		// 	// star.body.bounce.y = 0.5 + Math.random() * 0.2;
-		// 	star.body.gravity.y = 10 + Math.random() * 10;
-		// }
-
 		stars = game.add.emitter(450, 0, 250);
 		stars.makeParticles('star', [0], 25, true, false)
 
