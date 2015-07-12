@@ -75,6 +75,11 @@ var Game = {
 
 		// the score =====================================
 		scoreText = game.add.text(20, 20, 'Score: 0', { fontSize: '20px', fill: '#fff' })
+
+	},
+
+	restartGame: function() {
+		this.state.start('Game');
 	},
 
 	update: function() {
