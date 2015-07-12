@@ -12,7 +12,6 @@ var kirby;
 var cursors;
 
 var stars;
-var starCount = 25;
 var fireballs;
 var score = 0;
 var scoreText;
@@ -144,7 +143,6 @@ var Game = {
 
 var collectStar = function(player, star) {
 	star.kill()
-	starCount -= 1;
 
 	score += 5;
 	scoreText.text = 'Score: ' + score;
