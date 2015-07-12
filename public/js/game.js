@@ -11,7 +11,6 @@ var kirby;
 
 var cursors;
 
-var emitter;
 var stars;
 var fireballs;
 var score = 0;
@@ -82,13 +81,13 @@ var Game = {
 		// 	star.body.gravity.y = 10 + Math.random() * 10;
 		// }
 
-		emitter = game.add.emitter(450, 0, 250);
-		emitter.makeParticles('star', [0], 25, true, false)
+		stars = game.add.emitter(450, 0, 250);
+		stars.makeParticles('star', [0], 25, true, false)
 
-		emitter.gravity = 50;
-		emitter.bounce.setTo(0.5, 0.5);
+		stars.gravity = 50;
+		stars.bounce.setTo(0.5, 0.5);
 
-		emitter.start(false, 0, 1000)
+		stars.start(false, 0, 1000)
 
 		// the fireball ==================================
 		// fireballs = game.add.group();
@@ -112,9 +111,9 @@ var Game = {
 	update: function() {
 		game.physics.arcade.collide(kirby, ground);
 		game.physics.arcade.collide(kirby, platforms);
-		game.physics.arcade.collide(emitter, platforms);
+		game.physics.arcade.collide(stars, platforms);
 
-		game.physics.arcade.overlap(kirby, emitter, collectStar, null, this);
+		game.physics.arcade.overlap(kirby, stars, collectStar, null, this);
 		game.physics.arcade.overlap(kirby, fireballs, fireballCollision, null, this);
 
 
