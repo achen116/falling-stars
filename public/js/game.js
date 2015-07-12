@@ -12,6 +12,7 @@ var kirby;
 var cursors;
 
 var stars;
+var inWorldStatus = false;
 var fireballs;
 var score = 0;
 var scoreText;
@@ -134,10 +135,32 @@ var Game = {
 		}
 
 		// game over - no more stars ===============================
-		if (starCount === 0) {
-			this.restartGame;
-		}
+		this.checkGameOver();
 	},
+
+	checkStarsInWorld: function() {
+		var starsInWorld = []
+
+		stars.children.forEach(function(star) {
+			starsInWorld.push(star.inWorld);
+		});
+
+		inWorldStatus = starsInWorld.every(function(star) {
+			if (star === false) {
+				return true
+			}
+		})
+
+		return inWorldStatus;
+	},
+
+	checkGameOver: function() {
+		if (this.checkStarsInWorld()) {
+			game.add.text(350, game.world.height - 500, 'GAME OVER', { fontSize: '50px', fill: '#fff' })
+			game.add.button(435, game.world.height - 450, 'play-again', this.restartGame, this);
+		}
+	}
+
 
 }
 
