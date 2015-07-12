@@ -6,6 +6,7 @@
 
 var sky;
 var ground;
+var platforms;
 var kirby;
 
 var cursors;
@@ -19,8 +20,9 @@ var Game = {
 	preload: function() {
 		game.load.image('sky', './imgs/sky.png');
 		game.load.image('ground', './imgs/ground.png');
+		game.load.image('ledge', './imgs/ledge.png');
 		game.load.image('star', './imgs/star.png');
-		game.load.image('fireball', './imgs/fireball.png');
+		game.load.image('fireball', './imgs/red-fireball.png');
 		game.load.spritesheet('kirby', './imgs/kirby.png', 28.75, 26);
 		game.load.spritesheet('hurt-kirby', './imgs/hurt-kirby.png', 29.85, 26);
 
@@ -38,12 +40,27 @@ var Game = {
 		game.physics.arcade.enable(ground);
 		ground.body.immovable = true;
 
+		// the platforms ==================================
+		platforms = game.add.group();
+		platforms.enableBody = true;
+
+		var bottomLedge = platforms.create(600, 550, 'ledge');
+		bottomLedge.body.immovable = true;
+
+		var middleLedge = platforms.create(-100, 400, 'ledge');
+		middleLedge.body.immovable = true;
+
+		var topLedge = platforms.create(500, 200, 'ledge');
+		topLedge.scale.setTo(0.5, 1)
+		topLedge.body.immovable = true;
+
+
 		// the kirby ======================================
 		kirby = game.add.sprite(game.world.centerX, game.world.height - 250, 'kirby');
 		kirby.frame = 11
 
 		game.physics.arcade.enable(kirby);
-		kirby.body.bounce.y = 0.5;
+		kirby.body.bounce.y = 0.2;
 		kirby.body.gravity.y = 350;
 		kirby.body.collideWorldBounds = true;
 
@@ -59,18 +76,18 @@ var Game = {
 
 		for (var i = 0; i < 20; i++) {
 			var star = stars.create(i * 50, 0, 'star');
-			star.body.bounce.y = 0.5 + Math.random() * 0.2;
-			star.body.gravity.y = 50 + Math.random() * 100;
+			// star.body.bounce.y = 0.5 + Math.random() * 0.2;
+			star.body.gravity.y = 10 + Math.random() * 10;
 		}
 
 		// the fireball ==================================
 		fireballs = game.add.group();
 		fireballs.enableBody = true;
 
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < 10; i++) {
 			var fireball = fireballs.create(i * 100, 0, 'fireball');
 			fireball.body.bounce.y = 0.1 + Math.random() * 0.2;
-			fireball.body.gravity.y = 25 + Math.random() * 100;
+			fireball.body.gravity.y = 5 + Math.random() * 10;
 		}
 
 		// the score =====================================
@@ -84,8 +101,8 @@ var Game = {
 
 	update: function() {
 		game.physics.arcade.collide(kirby, ground);
-		game.physics.arcade.collide(stars, ground);
-		game.physics.arcade.collide(fireballs, ground);
+		game.physics.arcade.collide(kirby, platforms);
+		// game.physics.arcade.collide(stars, platforms);
 
 		game.physics.arcade.overlap(kirby, stars, collectStar, null, this);
 		game.physics.arcade.overlap(kirby, fireballs, fireballCollision, null, this);
@@ -110,16 +127,8 @@ var Game = {
 			kirby.frame = 11;
 		}
 
-		// game over ====================================
-		// this.gameOver;
-
 	},
 
-	// gameOver: function() {
-	// 	if (starCount === 0) {
-	// 		game.state.start('GameOver');
-	// 	}
-	// }
 }
 
 var collectStar = function(player, star) {
