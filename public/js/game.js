@@ -90,6 +90,13 @@ var Game = {
 		// 	fireball.body.gravity.y = 5 + Math.random() * 10;
 		// }
 
+		fireballs = game.add.emitter(450, 0, 250);
+		fireballs.makeParticles('fireball', [0], 10, true, false);
+
+		fireballs.gravity = 25;
+
+		fireballs.start(false, 0, 1000);
+
 		// the score =====================================
 		scoreText = game.add.text(20, 20, 'Score: 0', { fontSize: '20px', fill: '#fff' })
 
