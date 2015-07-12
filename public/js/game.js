@@ -12,6 +12,7 @@ var kirby;
 var cursors;
 
 var stars;
+var starCount = 25;
 var fireballs;
 var score = 0;
 var scoreText;
@@ -72,7 +73,7 @@ var Game = {
 		cursors = game.input.keyboard.createCursorKeys();
 
 		// the stars =====================================
-		stars = game.add.emitter(450, 0, 250);
+		stars = game.add.emitter(400, 0, 25);
 		stars.makeParticles('star', [0], 25, true, false)
 
 		stars.gravity = 50;
@@ -90,10 +91,10 @@ var Game = {
 		// 	fireball.body.gravity.y = 5 + Math.random() * 10;
 		// }
 
-		fireballs = game.add.emitter(450, 0, 250);
+		fireballs = game.add.emitter(500, 0, 10);
 		fireballs.makeParticles('fireball', [0], 10, true, false);
 
-		fireballs.gravity = 25;
+		fireballs.gravity = 15;
 
 		fireballs.start(false, 0, 1000);
 
@@ -114,8 +115,7 @@ var Game = {
 		game.physics.arcade.overlap(kirby, stars, collectStar, null, this);
 		game.physics.arcade.overlap(kirby, fireballs, fireballCollision, null, this);
 
-
-		// reset kirby's velocity ========================
+		// reset kirby's velocity ===================================
 		kirby.body.velocity.x = 0;
 
 		if (cursors.left.isDown) {
@@ -134,12 +134,17 @@ var Game = {
 			kirby.frame = 11;
 		}
 
+		// game over - no more stars ===============================
+		if (starCount === 0) {
+			this.restartGame;
+		}
 	},
 
 }
 
 var collectStar = function(player, star) {
 	star.kill()
+	starCount -= 1;
 
 	score += 5;
 	scoreText.text = 'Score: ' + score;
