@@ -82,15 +82,6 @@ var Game = {
 		stars.start(false, 0, 1000)
 
 		// the fireball ==================================
-		// fireballs = game.add.group();
-		// fireballs.enableBody = true;
-
-		// for (var i = 0; i < 5; i++) {
-		// 	var fireball = fireballs.create(i * 200, 0, 'fireball');
-		// 	fireball.body.bounce.y = 0.1 + Math.random() * 0.2;
-		// 	fireball.body.gravity.y = 5 + Math.random() * 10;
-		// }
-
 		fireballs = game.add.emitter(500, 0, 10);
 		fireballs.makeParticles('fireball', [0], 10, true, false);
 
