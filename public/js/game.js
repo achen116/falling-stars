@@ -152,7 +152,6 @@ var Game = {
 		}
 	}
 
-
 }
 
 var collectStar = function(player, star) {

@@ -4,7 +4,7 @@
 
 var GameOver = {
 	preload: function() {
-		game.load.image('gameover', './imgs/menu.png');
+		game.load.image('gameover', './imgs/game-over.png');
 	},
 
 	create: function() {
