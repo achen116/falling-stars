@@ -44,24 +44,25 @@ var Game = {
 		platforms = game.add.group();
 		platforms.enableBody = true;
 
-		var bottomLedge = platforms.create(600, 550, 'ledge');
+		var bottomLedge = platforms.create(600, 500, 'ledge');
 		bottomLedge.body.immovable = true;
 
-		var middleLedge = platforms.create(-100, 400, 'ledge');
+		var middleLedge = platforms.create(-100, 350, 'ledge');
 		middleLedge.body.immovable = true;
 
-		var topLedge = platforms.create(500, 200, 'ledge');
+		var topLedge = platforms.create(500, 150, 'ledge');
 		topLedge.scale.setTo(0.5, 1)
 		topLedge.body.immovable = true;
 
 
 		// the kirby ======================================
 		kirby = game.add.sprite(game.world.centerX, game.world.height - 250, 'kirby');
+		kirby.scale.setTo(2, 2);
 		kirby.frame = 11
 
 		game.physics.arcade.enable(kirby);
 		kirby.body.bounce.y = 0.2;
-		kirby.body.gravity.y = 350;
+		kirby.body.gravity.y = 250;
 		kirby.body.collideWorldBounds = true;
 
 		kirby.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10, true);
@@ -84,8 +85,8 @@ var Game = {
 		fireballs = game.add.group();
 		fireballs.enableBody = true;
 
-		for (var i = 0; i < 10; i++) {
-			var fireball = fireballs.create(i * 100, 0, 'fireball');
+		for (var i = 0; i < 5; i++) {
+			var fireball = fireballs.create(i * 200, 0, 'fireball');
 			fireball.body.bounce.y = 0.1 + Math.random() * 0.2;
 			fireball.body.gravity.y = 5 + Math.random() * 10;
 		}
@@ -141,8 +142,9 @@ var collectStar = function(player, star) {
 var fireballCollision = function(player, fireball) {
 	kirby.kill()
 	hurtKirby = game.add.sprite(kirby.position.x, kirby.position.y, 'hurt-kirby');
+	hurtKirby.scale.setTo(2, 2);
 	
-	hurtKirby.animations.add('hurt', [0, 1, 2, 3, 4, 5, 6], 5, false);
+	hurtKirby.animations.add('hurt', [0, 1, 2, 3, 4, 5, 6], 10, false);
 	hurtKirby.animations.play('hurt');
 
 	game.add.text(350, game.world.height - 500, 'GAME OVER', { fontSize: '50px', fill: '#fff' })
