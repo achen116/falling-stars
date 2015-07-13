@@ -63,7 +63,7 @@ var Game = {
 
 		game.physics.arcade.enable(kirby);
 		kirby.body.bounce.y = 0.2;
-		kirby.body.gravity.y = 250;
+		kirby.body.gravity.y = 350;
 		kirby.body.collideWorldBounds = true;
 
 		kirby.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10, true);
