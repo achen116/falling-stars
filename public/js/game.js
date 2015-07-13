@@ -82,8 +82,8 @@ var Game = {
 		stars.start(false, 0, 1000)
 
 		// the fireball ==================================
-		fireballs = game.add.emitter(500, 0, 10);
-		fireballs.makeParticles('fireball', [0], 10, true, false);
+		fireballs = game.add.emitter(500, 0, 25);
+		fireballs.makeParticles('fireball', [0], 25, true, false);
 
 		fireballs.gravity = 15;
 
