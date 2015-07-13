@@ -117,7 +117,7 @@ var Game = {
 			kirby.body.velocity.x = 150;
 			kirby.animations.play('right');
 		}
-		else if (cursors.up.isDown && kirby.body.touching.down) {
+		else if (cursors.up.isDown) {
 			kirby.body.velocity.y = -350;
 		}
 		else {
