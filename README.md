@@ -4,13 +4,14 @@ Collect as many stars as you can in this simple, fun game featuring our favorite
 Visit [http://fallingstars.herokuapp.com](http://fallingstars.herokuapp.com) to play.
 
 ## Game Instructions
+![falling stars](/public/imgs/falling-stars.png)
+
 ```
 * Collect the falling stars to gain points
 * Avoid the fireballs at all costs -- running into one ends the game!
 * Use the left and right arrows to move from side to side
 * Use the up arrow to jump
 ```
-![falling stars](/public/imgs/falling-stars.png)
 
 ## Future Goals
 ```
