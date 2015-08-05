@@ -1,5 +1,7 @@
 # Falling Stars
-Collect as many stars as you can in this simple, fun game featuring our favorite childhood character: Kirby! Visit [http://fallingstars.herokuapp.com](http://fallingstars.herokuapp.com) to play.
+Collect as many stars as you can in this simple, fun game featuring our favorite childhood character: Kirby!
+
+Visit [http://fallingstars.herokuapp.com](http://fallingstars.herokuapp.com) to play.
 
 ## Game Instructions
 ```
